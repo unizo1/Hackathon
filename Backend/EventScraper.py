@@ -6,7 +6,7 @@ from pymongo.errors import PyMongoError
 import json
 
 def event_grabber():
-    with open('mongodb_credentials.json', 'r') as f:
+    with open('mongo_credentials.json', 'r') as f:
         creds = json.load(f)
 
     username = creds['username']
