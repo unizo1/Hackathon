@@ -1,0 +1,28 @@
+/* map.css */
+
+.leaflet-container {
+    width: 100%;    /* Makes the map responsive */
+    height: 100vh;  /* Fills the viewport height */
+}
+
+.map-container {
+    display: flex;
+    height: 100vh; /* Full height */
+}
+
+.map-section {
+    width: 60%; /* Map takes 60% of the width */
+}
+
+.info-section {
+    width: 40%; /* Info section takes 40% of the width */
+    padding: 20px; /* Add some padding */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.building-info h2 {
+    margin: 0; /* Remove margin for the heading */
+}
+
+
+
