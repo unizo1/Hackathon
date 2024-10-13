@@ -4,7 +4,7 @@ from openai import OpenAI
 from EventScraper import event_grabber
 
 def EventAi(user_filter):
-    load_dotenv("OAKEY.en")
+    load_dotenv("OAKEY.env")
     API_KEY = os.getenv("OAKEY")
     client = OpenAI(
         # This is the default and can be omitted

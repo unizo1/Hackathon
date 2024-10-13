@@ -3,8 +3,36 @@ import requests
 import re
 from pymongo import MongoClient
 from pymongo.errors import PyMongoError
+import json
 
 def event_grabber():
+    with open('mongodb_credentials.json', 'r') as f:
+        creds = json.load(f)
+
+    username = creds['username']
+    password = creds['password']
+    host = creds['host']
+    port = creds['port']
+    database_name = creds['database_name']
+
+    # Create the MongoDB URI and connect to the database
+    uri = f"mongodb://{username}:{password}@{host}:{port}/{database_name}"
+    client = MongoClient(uri)
+    db = client[database_name]
+    collection_name = db['events']  # Replace 'events' with your collection name
+    # Create a MongoDB connection string
+
+    connection_string = f"mongodb://{username}:{password}@{host}:{port}/admin"
+
+    # Create a MongoClient
+    client = MongoClient(connection_string)
+
+    # Access the event_data database and the specified collection
+    db = client[database_name]
+    collection = db[collection_name]
+
+    # delete collection
+    collection.delete_many({})
 
     # Scraping data from the website
     response = requests.get("https://mason360.gmu.edu/mobile_ws/v17/mobile_events_list?range=0&limit=&filter4_contains=OR&filter4_notcontains=OR&order=undefined&search_word=&&1728715900675")
