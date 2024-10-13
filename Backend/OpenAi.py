@@ -1,9 +1,7 @@
 import os
-from pymongo import MongoClient
 from dotenv import load_dotenv
 from openai import OpenAI
 from EventScraper import event_grabber
-import json
 
 def EventAi(user_filter):
     load_dotenv("OAKEY.env")
@@ -13,41 +11,7 @@ def EventAi(user_filter):
         api_key = API_KEY
     )
 
-    event_grabber()
-
-    # Load MongoDB credentials from a JSON file
-    with open('mongo_credentials.json', 'r') as f:
-        creds = json.load(f)
-
-
-    username = creds['username']
-    password = creds['password']
-    host = creds['host']
-    port = creds['port']
-    database_name = creds['database_name']
-
-
-    # Create the MongoDB URI and connect to the database
-    uri = f"mongodb://{username}:{password}@{host}:{port}/{database_name}"
-    client = MongoClient(uri)
-
-
-    # Access the event_data collection
-    collection = client[database_name]['event_data']
-
-
-    # Retrieve all documents in the collection
-    documents = collection.find({})
-
-
-    # Convert all documents to a string
-    all_docs_str = ""
-    for doc in documents:
-        all_docs_str += str(doc) + "\n"  # Concatenate each document as a string, separated by newlines
-
-
-    # Optionally, delete all documents in the collection
-    collection.delete_many({})
+    all_docs_str = event_grabber()
 
     chat_completion = client.chat.completions.create(
         messages=[
