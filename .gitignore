@@ -1,1 +1,4 @@
+OAKEY.env
+__pycache__/*
 node_modules/
+mongo_credentials.json
