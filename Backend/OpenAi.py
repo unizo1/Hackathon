@@ -1,7 +1,6 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from EventScraper import event_grabber
 
 def EventAi(user_filter):
     load_dotenv("OAKEY.env")
@@ -11,8 +10,7 @@ def EventAi(user_filter):
         api_key = API_KEY
     )
 
-    events_string = event_grabber()
-    #print(events_string)
+
 
     chat_completion = client.chat.completions.create(
         messages=[
